@@ -114,7 +114,7 @@ def matching_name_with_dblp(name: str) -> int:
     dblp_url = f'https://dblp.org/search/author/api?q=author%3A{author_name}$%3A&format=json&c=10'
     try:
         # Send a request to the DBLP API.
-        response = requests.get(dblp_url)
+        response = requests.get(dblp_url, timeout=60)
         # Extract the number of completions from the JSON response.
         if "<title>429 Too Many Requests</title>" in response.text:
             # wait for a few seconds and try again
