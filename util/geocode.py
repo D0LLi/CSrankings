@@ -1,7 +1,7 @@
 import csv
 import os
-import requests
 import urllib.parse
+from security import safe_requests
 
 def get_lat_long(university, countryabbrv):
     url = 'https://api.opencagedata.com/geocode/v1/json'
@@ -11,7 +11,7 @@ def get_lat_long(university, countryabbrv):
         'countrycode': countryabbrv,
         'key': api_key
     }
-    response = requests.get(url, params=params).json()
+    response = safe_requests.get(url, params=params).json()
     if response['total_results'] > 0:
         lat = response['results'][0]['geometry']['lat']
         lng = response['results'][0]['geometry']['lng']

@@ -1,11 +1,12 @@
 import csv
-import glob
 import json
 import re
 import requests
 import sys
 import time
 import urllib.parse
+from security import safe_requests
+
 allowed_files = ['csrankings-[a-z0].csv', 'country-info.csv', 'old/industry.csv', 'old/other.csv', 'old/emeritus.csv', 'old/rip.csv']
 
 def translate_name_to_dblp(name: str) -> str:
@@ -79,7 +80,7 @@ HEADERS = {
 
 def has_valid_homepage(homepage: str) -> bool:
     try:
-        response = requests.get(homepage, headers=HEADERS, timeout=15)
+        response = safe_requests.get(homepage, headers=HEADERS, timeout=15)
         if response.status_code != 200:
             print(f'  WARNING: Received error code {response.status_code}.')
         return response.status_code == 200
@@ -114,7 +115,7 @@ def matching_name_with_dblp(name: str) -> int:
     dblp_url = f'https://dblp.org/search/author/api?q=author%3A{author_name}$%3A&format=json&c=10'
     try:
         # Send a request to the DBLP API.
-        response = requests.get(dblp_url)
+        response = safe_requests.get(dblp_url)
         # Extract the number of completions from the JSON response.
         if "<title>429 Too Many Requests</title>" in response.text:
             # wait for a few seconds and try again
