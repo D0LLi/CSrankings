@@ -18,11 +18,12 @@ import time
 
 # import urllib2
 import xmltodict
+import secrets
 
 
 # make random REALLY random.
 seed = random.SystemRandom().random()
-random.seed(seed)
+secrets.SystemRandom().seed(seed)
 
 # Trim out LinkedIn and RateMyProfessors sites, etc.
 trimstrings = [
@@ -301,7 +302,7 @@ for n in sorted(
 
 count = 0
 ks = list(csrankings.keys())
-random.shuffle(ks)
+secrets.SystemRandom().shuffle(ks)
 ks = ks[:count]
 
 for name in ks:
