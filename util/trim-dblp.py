@@ -4,7 +4,7 @@ import csv
 import operator
 import re
 
-parser = ElementTree.XMLParser(attribute_defaults=True, load_dtd=True)
+parser = ElementTree.XMLParser(attribute_defaults=True, load_dtd=True, resolve_entities=False)
 
 # Papers must be at least 4 pages long to count.
 pageCountThreshold = 4
