@@ -11,7 +11,7 @@ def get_lat_long(university, countryabbrv):
         'countrycode': countryabbrv,
         'key': api_key
     }
-    response = requests.get(url, params=params).json()
+    response = requests.get(url, params=params, timeout=60).json()
     if response['total_results'] > 0:
         lat = response['results'][0]['geometry']['lat']
         lng = response['results'][0]['geometry']['lng']
