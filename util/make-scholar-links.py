@@ -81,8 +81,8 @@ def searchAuthor(name):
     userMatcher = re.compile("user=([A-Za-z0-9\-]+)")
     quoted = urllib.parse.quote_plus(name)
     res = requests.get(
-        "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=" + quoted + "&btnG="
-    )
+        "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=" + quoted + "&btnG=", 
+    timeout=60)
     res.raise_for_status()
     soup = bs4.BeautifulSoup(res.text)
     #    print(res.text)
