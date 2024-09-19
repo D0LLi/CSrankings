@@ -21,7 +21,7 @@ import re
 import time
 import fcntl
 import bs4
-import requests
+from security import safe_requests
 
 maxBeforeEnd = 1000  # Only do this many lookups before exiting.
 expirationDate = 60 * 60 * 24 * 7 * 5  # Try again after five weeks
@@ -80,7 +80,7 @@ import urllib.parse
 def searchAuthor(name):
     userMatcher = re.compile("user=([A-Za-z0-9\-]+)")
     quoted = urllib.parse.quote_plus(name)
-    res = requests.get(
+    res = safe_requests.get(
         "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=" + quoted + "&btnG="
     )
     res.raise_for_status()
