@@ -14,7 +14,6 @@ from collections import *
 
 import codecs
 import sys
-import random
 import urllib3
 import operator
 import re
@@ -22,6 +21,7 @@ import time
 import fcntl
 import bs4
 import requests
+import secrets
 
 maxBeforeEnd = 1000  # Only do this many lookups before exiting.
 expirationDate = 60 * 60 * 24 * 7 * 5  # Try again after five weeks
@@ -168,7 +168,7 @@ newvisited = {}
 newscholarLinks = {}
 
 
-random.shuffle(facultydictkeys)
+secrets.SystemRandom().shuffle(facultydictkeys)
 for name in facultydictkeys:
     if theCounter >= maxBeforeEnd:
         break

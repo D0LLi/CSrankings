@@ -5,11 +5,11 @@ import pkg_resources
 import google
 import codecs
 import sys
-import random
 import urllib2
 import operator
 import re
 import time
+import secrets
 
 
 def csv2dict_str_str(fname):
@@ -43,7 +43,7 @@ trim = [
 
 with codecs.open("homepages.csv", "a", "utf8") as outfile:
     facultydictkeys = list(facultydict.keys())
-    random.shuffle(facultydictkeys)
+    secrets.SystemRandom().shuffle(facultydictkeys)
     for name in facultydictkeys:
         # Skip any homepages we have already in the database.
         if name in homepages:
